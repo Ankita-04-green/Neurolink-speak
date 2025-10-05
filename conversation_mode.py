@@ -227,10 +227,15 @@ class ConversationManager:
         st.divider()
         st.subheader("Manual Input")
         manual_text = st.text_input("Enter your message manually")
+        native_translated_text = translate_text(
+                manual_text, 
+                "en", 
+                self.user.native_language
+            )
         if st.button("Send Manual Message") and manual_text:
             # Translate and generate audio
             translated_text = translate_text(
-                manual_text, 
+                native_translated_text, 
                 self.user.native_language, 
                 self.user.target_language
             )
@@ -240,7 +245,7 @@ class ConversationManager:
             # Save to conversation history
             message_entry = {
                 "sender": "You",
-                "original": manual_text,
+                "original": native_translated_text,
                 "translated": translated_text,
                 "confidence": 1.0,
                 "audio": audio_bytes,
@@ -269,3 +274,4 @@ def conversation_mode():
     # Create a new conversation manager instance for each call
     manager = ConversationManager()
     manager.conversation_interface()
+
