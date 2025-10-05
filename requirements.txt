@@ -1,0 +1,11 @@
+streamlit
+plotly
+sqlalchemy
+authlib
+torch
+transformers
+sentencepiece
+protobuf
+numpy
+scipy
+soundfile
